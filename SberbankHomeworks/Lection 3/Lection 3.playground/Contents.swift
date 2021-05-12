@@ -9,7 +9,7 @@ class Cat<T> {
 }
 
 struct Animal<T> {
-    var type: Cat<T>
+    private var type: Cat<T>
     var value: T {
         get {
             return type.value
@@ -21,5 +21,8 @@ struct Animal<T> {
             }
             type.value = newValue
         }
+    }
+    init(type: Cat<T>) {
+        self.type = type
     }
 }
