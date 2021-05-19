@@ -7,14 +7,20 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .blue
+        view.backgroundColor = .systemBackground
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .action, target: self, action: #selector(buttonTapped))
     }
-
-
+    
+    @objc private func buttonTapped() {
+        let customActivity = UIActivityViewController(activityItems: [""], applicationActivities: [CustomActivity()])
+        customActivity.excludedActivityTypes = [.postToFlickr, .postToVimeo, .saveToCameraRoll]
+        
+        present(customActivity, animated: true)
+    }
 }
-
