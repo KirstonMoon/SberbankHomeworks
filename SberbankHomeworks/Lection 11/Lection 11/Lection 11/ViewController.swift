@@ -14,10 +14,13 @@ final class ViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .action, target: self, action: #selector(buttonTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action,
+                                                           target: self,
+                                                           action: #selector(buttonTapped))
     }
     
     @objc private func buttonTapped() {
+        
         let customActivity = UIActivityViewController(activityItems: [""], applicationActivities: [CustomActivity()])
         customActivity.excludedActivityTypes = [.postToFlickr, .postToVimeo, .saveToCameraRoll]
         
