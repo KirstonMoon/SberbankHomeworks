@@ -21,9 +21,10 @@ final class ViewController: UIViewController {
     
     @objc private func buttonTapped() {
         
-        let customActivity = UIActivityViewController(activityItems: [""], applicationActivities: [CustomActivity()])
-        customActivity.excludedActivityTypes = [.postToFlickr, .postToVimeo, .saveToCameraRoll]
+        let customActivity = CustomActivity()
+        let customActivityVC = UIActivityViewController(activityItems: [""], applicationActivities: [customActivity])
+        customActivityVC.excludedActivityTypes = [.postToFlickr, .postToVimeo, .saveToCameraRoll]
         
-        present(customActivity, animated: true)
+        present(customActivityVC, animated: true)
     }
 }
