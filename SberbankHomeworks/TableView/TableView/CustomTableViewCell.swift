@@ -13,6 +13,8 @@ class CustomTableViewCell: UITableViewCell {
         return self.description()
     }
     
+    var cellAction: ((CustomTableViewCell) -> Void)?
+    
     private lazy var title: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -46,6 +48,10 @@ class CustomTableViewCell: UITableViewCell {
         ])
         
         super.updateConstraints()
+    }
+    
+    override func prepareForReuse() {
+        <#code#>
     }
     
     @objc private func buttonTapped() {

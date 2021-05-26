@@ -7,18 +7,22 @@
 
 import UIKit
 
+protocol VisitedCell: AnyObject {
+    
+}
+
 class MainViewController: UIViewController {
     
-    private let visitedPlaces = ["Moscow",
-                                 "Paris",
-                                 "New York",
-                                 "Tokyo",
-                                 "Beijing",
-                                 "Sao Paulo",
-                                 "Mumbai",
-                                 "Los Angeles",
-                                 "Istanbul",
-                                 "London"]
+    private let cities = [City(name: "Moscow", isCheck: false),
+                          City(name: "Paris", isCheck: false),
+                          City(name: "New York", isCheck: false),
+                          City(name: "Tokyo", isCheck: false),
+                          City(name: "Beijing", isCheck: false),
+                          City(name: "Sao Paulo", isCheck: false),
+                          City(name: "Mumbai", isCheck: false),
+                          City(name: "Los Angeles", isCheck: false),
+                          City(name: "Istanbul", isCheck: false),
+                          City(name: "London", isCheck: false)]
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -50,12 +54,12 @@ class MainViewController: UIViewController {
 extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        visitedPlaces.count
+        cities.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.cellId, for: indexPath) as! CustomTableViewCell
-        cell.textLabel?.text = visitedPlaces[indexPath.row]
+        cell.textLabel?.text = cities[indexPath.row].name
         return cell
     }
     
@@ -66,8 +70,8 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let placeViewController = PlaceViewController()
-        placeViewController.recievedPlace = visitedPlaces[indexPath.row]
-       
+        placeViewController.recievedPlace = cities[indexPath.row].name
+        
         tableView.deselectRow(at: indexPath, animated: true)
         
         navigationController?.pushViewController(placeViewController, animated: true)
