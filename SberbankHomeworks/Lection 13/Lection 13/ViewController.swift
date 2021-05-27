@@ -19,7 +19,7 @@ final class ViewController: UIViewController {
     
     private lazy var apples: [UIImageView] = {
         var apples = [UIImageView]()
-        for _ in 1...8 { apples.append(UIImageView(image: UIImage(named: "ApplePicture"))) }
+        for _ in 1...20 { apples.append(UIImageView(image: UIImage(named: "ApplePicture"))) }
         
         apples.forEach { apple in
             apple.contentMode = .scaleAspectFit
@@ -39,7 +39,7 @@ final class ViewController: UIViewController {
         
         apples.forEach { $0.frame.size = .init(width: 0, height: 0) }
         apples.forEach { $0.center.x = CGFloat(Int.random(in: Int(view.frame.midX - 100)...Int(view.frame.midX + 100))) }
-        apples.forEach { $0.center.y = CGFloat(Int.random(in: Int(view.frame.midY - 110)...Int(view.frame.midY - 50))) }
+        apples.forEach { $0.center.y = CGFloat(Int.random(in: Int(view.frame.midY - 130)...Int(view.frame.midY - 10))) }
         
         treePicture.frame.size = .init(width: 0, height: 0)
         treePicture.center.x = view.frame.midX
@@ -85,8 +85,8 @@ final class ViewController: UIViewController {
         UIView.animate(withDuration: 3, delay: 0, options: options) {
             [weak self] in
             guard let self = self else { return }
-            self.apples.forEach { $0.bounds.size.height = 50 }
-            self.apples.forEach { $0.bounds.size.width = 50 }
+            self.apples.forEach { $0.bounds.size.height = 35 }
+            self.apples.forEach { $0.bounds.size.width = 35 }
         }
         
         apples.forEach { $0.isHidden = false }
