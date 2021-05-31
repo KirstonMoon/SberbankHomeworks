@@ -9,13 +9,20 @@ import UIKit
 
 final class ViewController: UIViewController {
     
+    private let donutRadius: CGFloat = 150
+    private var holeRadius: CGFloat { return donutRadius / 3 }
+    
     private lazy var donutView: DonutView = {
-        let donutView = DonutView(diameter: view.frame.height / 3, color: .systemBlue)
+        let donutView = DonutView(donutRadius: donutRadius, holeRadius: holeRadius)
+        donutView.translatesAutoresizingMaskIntoConstraints = false
+        donutView.backgroundColor = .systemPink
         return donutView
     }()
     
     private lazy var buttonInsideDonut: UIButton = {
         let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = donutView.holeColor
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         return button
     }()
@@ -25,19 +32,25 @@ final class ViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
         
-        view.addSubview(donutView)
         view.addSubview(buttonInsideDonut)
+        view.addSubview(donutView)
+        
+        activateConstraints()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        donutView.center = view.center
-        buttonInsideDonut.frame = .init(x: 0, y: 0, width: donutView.frame.width / 3, height: donutView.frame.height / 3)
-        buttonInsideDonut.center = view.center
-        
-        buttonInsideDonut.backgroundColor = .systemBackground
-        buttonInsideDonut.layer.cornerRadius = buttonInsideDonut.frame.height / 2
+    private func activateConstraints() {
+        NSLayoutConstraint.activate([
+            
+            donutView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            donutView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            donutView.heightAnchor.constraint(equalToConstant: donutRadius * 2),
+            donutView.widthAnchor.constraint(equalToConstant: donutRadius * 2),
+            
+            buttonInsideDonut.centerXAnchor.constraint(equalTo: donutView.centerXAnchor),
+            buttonInsideDonut.centerYAnchor.constraint(equalTo: donutView.centerYAnchor),
+            buttonInsideDonut.heightAnchor.constraint(equalToConstant: donutRadius),
+            buttonInsideDonut.widthAnchor.constraint(equalToConstant: donutRadius)
+        ])
     }
     
     @objc func buttonTapped() {
