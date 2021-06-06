@@ -11,10 +11,12 @@ class TrackImageViewController: UIViewController {
     
     private let networkService: ItunesNetworkServiceProtocol
     private let imageUrl: String
+    private let trackName: String
     
-    init(networkService: ItunesNetworkServiceProtocol, trackImage: String) {
+    init(networkService: ItunesNetworkServiceProtocol, trackImage: String, trackName: String) {
         self.networkService = networkService
         self.imageUrl = trackImage
+        self.trackName = trackName
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -33,18 +35,15 @@ class TrackImageViewController: UIViewController {
         
         setupUI()
         loadData()
+        title = trackName
     }
     
     private func setupUI() {
         view.backgroundColor = .systemBackground
         view.addSubview(trackImageView)
-        
-        NSLayoutConstraint.activate([
-            trackImageView.heightAnchor.constraint(equalToConstant: 100),
-            trackImageView.widthAnchor.constraint(equalToConstant: 100),
-            trackImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            trackImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
+        activateConstraints()
+        navigationController?.navigationBar.prefersLargeTitles = true
+        title = trackName
     }
     
     private func loadData() {
@@ -55,5 +54,15 @@ class TrackImageViewController: UIViewController {
                 self.trackImageView.image = imageFromData
             }
         }
+    }
+    
+    private func activateConstraints() {
+        
+        let imageViewConstraints = [trackImageView.heightAnchor.constraint(equalToConstant: 100),
+                                    trackImageView.widthAnchor.constraint(equalToConstant: 100),
+                                    trackImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                                    trackImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor)]
+        
+        NSLayoutConstraint.activate(imageViewConstraints)
     }
 }

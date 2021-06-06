@@ -11,7 +11,7 @@ final class MainViewController: UIViewController {
     
     private let networkService: ItunesNetworkServiceProtocol
     
-    private var dataSource = ItunesResponse(results: [Track(trackName: nil, artworkUrl100: "")]) {
+    private var dataSource: ItunesResponse? {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -21,7 +21,6 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupUI()
         loadData()
     }
@@ -45,16 +44,11 @@ final class MainViewController: UIViewController {
     }()
     
     private func setupUI() {
-        
         view.backgroundColor = .systemBackground
         view.addSubview(tableView)
-        
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+        activateConstraints()
+        navigationController?.navigationBar.prefersLargeTitles = true
+        title = "iTunes search"
     }
     
     private func loadData() {
@@ -71,22 +65,37 @@ final class MainViewController: UIViewController {
     }
     
     private func showAlert() {
-        let alert = UIAlertController(title: "Не удалось отобразить данные", message: "Пожалуйста попробуйте еще раз", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Не удалось отобразить данные",
+                                      message: "Пожалуйста попробуйте еще раз", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default)
         alert.addAction(okAction)
         present(alert, animated: true)
+    }
+    
+    private func activateConstraints() {
+        
+        let tableViewConstraints = [tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+                                    tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+                                    tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+                                    tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)]
+        
+        NSLayoutConstraint.activate(tableViewConstraints)
     }
 }
 
 extension MainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        dataSource.results.count
+        dataSource?.results.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: TrackCell.cellId, for: indexPath)
-        (cell as? TrackCell)?.configure(with: dataSource.results[indexPath.row])
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TrackCell.cellId,
+                                                       for: indexPath) as? TrackCell,
+              let track = dataSource?.results[indexPath.row] else { return UITableViewCell() }
+        
+        cell.configure(with: track)
         return cell
     }
 }
@@ -95,7 +104,14 @@ extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let imageViewController = TrackImageViewController(networkService: networkService, trackImage: dataSource.results[indexPath.row].artworkUrl100)
+        
+        guard let trackImage = dataSource?.results[indexPath.row].artworkUrl100,
+              let trackName = dataSource?.results[indexPath.row].trackName else { return }
+        
+        let imageViewController = TrackImageViewController(networkService: networkService,
+                                                           trackImage: trackImage,
+                                                           trackName: trackName)
+        
         navigationController?.pushViewController(imageViewController, animated: true)
     }
 }

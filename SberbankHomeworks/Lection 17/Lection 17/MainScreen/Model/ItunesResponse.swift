@@ -8,12 +8,10 @@
 import Foundation
 
 struct ItunesResponse: Codable {
-    
     var results: [Track]
 }
 
 struct Track: Codable {
-    
-    var trackName: String?
+    var trackName: String
     var artworkUrl100: String
 }
