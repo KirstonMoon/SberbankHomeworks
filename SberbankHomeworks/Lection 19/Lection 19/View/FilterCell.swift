@@ -32,7 +32,6 @@ final class FilterCell: UICollectionViewCell {
         super.init(frame: frame)
         addSubview(filterView)
         addSubview(filterTitle)
-        activateConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -44,16 +43,23 @@ final class FilterCell: UICollectionViewCell {
         self.filterTitle.text = filter.filters[index]
     }
     
-    private func activateConstraints() {
-        NSLayoutConstraint.activate(
-            [filterTitle.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3),
-             filterTitle.leadingAnchor.constraint(equalTo: leadingAnchor),
-             filterTitle.trailingAnchor.constraint(equalTo: trailingAnchor),
-             filterTitle.bottomAnchor.constraint(equalTo: bottomAnchor),
-             
-             filterView.topAnchor.constraint(equalTo: topAnchor),
-             filterView.leadingAnchor.constraint(equalTo: leadingAnchor),
-             filterView.trailingAnchor.constraint(equalTo: trailingAnchor),
-             filterView.bottomAnchor.constraint(equalTo: filterTitle.topAnchor)])
+    override class var requiresConstraintBasedLayout: Bool {
+        true
+    }
+    
+    override func updateConstraints() {
+        NSLayoutConstraint.activate([
+            filterTitle.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3),
+            filterTitle.leadingAnchor.constraint(equalTo: leadingAnchor),
+            filterTitle.trailingAnchor.constraint(equalTo: trailingAnchor),
+            filterTitle.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            filterView.topAnchor.constraint(equalTo: topAnchor),
+            filterView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            filterView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            filterView.bottomAnchor.constraint(equalTo: filterTitle.topAnchor)
+        ])
+        
+        super.updateConstraints()
     }
 }

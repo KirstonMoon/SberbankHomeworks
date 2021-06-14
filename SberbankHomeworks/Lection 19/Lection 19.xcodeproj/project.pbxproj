@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		203413262677ADCA007C1112 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203413252677ADCA007C1112 /* MainView.swift */; };
 		208C2978266FCA30006F7D2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208C2977266FCA30006F7D2B /* AppDelegate.swift */; };
 		208C297C266FCA30006F7D2B /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208C297B266FCA30006F7D2B /* MainScreenViewController.swift */; };
 		208C2981266FCA31006F7D2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 208C2980266FCA31006F7D2B /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		203413252677ADCA007C1112 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		208C2974266FCA30006F7D2B /* Lection 19.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lection 19.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		208C2977266FCA30006F7D2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		208C297B266FCA30006F7D2B /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 		208C299A266FCD40006F7D2B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				203413252677ADCA007C1112 /* MainView.swift */,
 				ECA6B7D12674CE030072EA33 /* FilterCell.swift */,
 			);
 			path = View;
@@ -175,6 +178,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				208C297C266FCA30006F7D2B /* MainScreenViewController.swift in Sources */,
+				203413262677ADCA007C1112 /* MainView.swift in Sources */,
 				ECA6B7D72674E6D50072EA33 /* SliderViewController.swift in Sources */,
 				ECA6B7D92674EE0B0072EA33 /* ImagesDataSource.swift in Sources */,
 				ECA6B7D52674E0000072EA33 /* FilterService.swift in Sources */,
