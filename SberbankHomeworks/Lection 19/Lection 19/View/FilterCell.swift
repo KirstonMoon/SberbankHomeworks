@@ -40,7 +40,7 @@ final class FilterCell: UICollectionViewCell {
     
     func configure(filter: FilterService, image: ImagesDataSource, index: Int) {
         self.filterView.image = image.images[index]
-        self.filterTitle.text = filter.filters[index]
+        self.filterTitle.text = String(filter.filters[index].dropFirst(2))
     }
     
     override class var requiresConstraintBasedLayout: Bool {

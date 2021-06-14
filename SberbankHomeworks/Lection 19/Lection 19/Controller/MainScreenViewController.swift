@@ -167,7 +167,7 @@ extension MainScreenViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         mainView.slider.value = 0.5
-        title = filter.filters[indexPath.row]
+        title = String(filter.filters[indexPath.row].dropFirst(2))
         selectedFilter = filter.filters[indexPath.row]
         selectedIndex = indexPath
         
