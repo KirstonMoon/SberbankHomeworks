@@ -14,7 +14,6 @@
 		208C2984266FCA31006F7D2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 208C2982266FCA31006F7D2B /* LaunchScreen.storyboard */; };
 		ECA6B7D22674CE030072EA33 /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA6B7D12674CE030072EA33 /* FilterCell.swift */; };
 		ECA6B7D52674E0000072EA33 /* FilterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA6B7D42674E0000072EA33 /* FilterService.swift */; };
-		ECA6B7D72674E6D50072EA33 /* SliderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA6B7D62674E6D50072EA33 /* SliderViewController.swift */; };
 		ECA6B7D92674EE0B0072EA33 /* ImagesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA6B7D82674EE0B0072EA33 /* ImagesDataSource.swift */; };
 /* End PBXBuildFile section */
 
@@ -28,7 +27,6 @@
 		208C2985266FCA31006F7D2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ECA6B7D12674CE030072EA33 /* FilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
 		ECA6B7D42674E0000072EA33 /* FilterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterService.swift; sourceTree = "<group>"; };
-		ECA6B7D62674E6D50072EA33 /* SliderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderViewController.swift; sourceTree = "<group>"; };
 		ECA6B7D82674EE0B0072EA33 /* ImagesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,7 +92,6 @@
 			isa = PBXGroup;
 			children = (
 				208C297B266FCA30006F7D2B /* MainScreenViewController.swift */,
-				ECA6B7D62674E6D50072EA33 /* SliderViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -179,7 +176,6 @@
 			files = (
 				208C297C266FCA30006F7D2B /* MainScreenViewController.swift in Sources */,
 				203413262677ADCA007C1112 /* MainView.swift in Sources */,
-				ECA6B7D72674E6D50072EA33 /* SliderViewController.swift in Sources */,
 				ECA6B7D92674EE0B0072EA33 /* ImagesDataSource.swift in Sources */,
 				ECA6B7D52674E0000072EA33 /* FilterService.swift in Sources */,
 				ECA6B7D22674CE030072EA33 /* FilterCell.swift in Sources */,

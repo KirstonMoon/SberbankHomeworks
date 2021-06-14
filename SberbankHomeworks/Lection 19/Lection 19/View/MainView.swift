@@ -9,18 +9,34 @@ import UIKit
 
 final class MainView: UIView {
 
+    var intensity: ((CGFloat) -> ())?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         backgroundColor = .systemBackground
         
-        addSubview(collectionView)
         addSubview(imageView)
+        addSubview(slider)
+        addSubview(collectionView)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    lazy var slider: UISlider = {
+        let slider = UISlider()
+        
+        slider.translatesAutoresizingMaskIntoConstraints = false
+        slider.minimumValue = 0
+        slider.maximumValue = 1
+        slider.setValue(0.5, animated: true)
+        slider.addTarget(self, action: #selector(sliderMoved), for: .valueChanged)
+        slider.isHidden = true
+
+        return slider
+    }()
     
     lazy var imagePickerController: UIImagePickerController = {
         let imagePicker = UIImagePickerController()
@@ -64,17 +80,26 @@ final class MainView: UIView {
         
         NSLayoutConstraint.activate([
 
+            imageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            imageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            imageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5),
+            
+            slider.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
+            slider.topAnchor.constraint(equalTo: imageView.bottomAnchor),
+            slider.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5),
+            slider.bottomAnchor.constraint(equalTo: collectionView.topAnchor),
+            
             collectionView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.2),
             collectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            
-            imageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            imageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            imageView.bottomAnchor.constraint(equalTo: collectionView.topAnchor)
         ])
         
         super.updateConstraints()
+    }
+    
+    @objc private func sliderMoved() {
+        intensity?(CGFloat(slider.value))
     }
 }

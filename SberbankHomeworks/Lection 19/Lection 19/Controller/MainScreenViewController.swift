@@ -31,7 +31,7 @@ final class MainScreenViewController: UIViewController {
     private lazy var gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(openPhotoLibrary))
     
     // MARK: Life cycle
-
+    
     override func loadView() {
         view = mainView
     }
@@ -58,9 +58,8 @@ final class MainScreenViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         title = "Tap to start"
         navigationController?.navigationBar.barTintColor = .systemBackground
-        navigationItem.rightBarButtonItem = nil
     }
-
+    
     // MARK:  Button actions
     
     @objc private func saveButtonTapped() {
@@ -85,16 +84,20 @@ final class MainScreenViewController: UIViewController {
     }
     
     @objc private func settingsTapped() {
-        let sliderViewController = SliderViewController()
         
-        sliderViewController.intensity = { [weak self] slider in
+        switch mainView.slider.isHidden {
+        case true:
+            mainView.slider.isHidden = false
+        case false:
+            mainView.slider.isHidden = true
+        }
+        
+        mainView.intensity = { [weak self] value in
             guard let self = self else { return }
             self.mainView.imageView.image = self.filter.filterImage(filter: self.selectedFilter,
                                                                     image: self.selectedImage,
-                                                                    intensity: slider)
+                                                                    intensity: value)
         }
-        
-        present(sliderViewController, animated: true, completion: nil)
     }
     
     @objc private func openPhotoLibrary() {
@@ -163,6 +166,7 @@ extension MainScreenViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        mainView.slider.value = 0.5
         title = filter.filters[indexPath.row]
         selectedFilter = filter.filters[indexPath.row]
         selectedIndex = indexPath
