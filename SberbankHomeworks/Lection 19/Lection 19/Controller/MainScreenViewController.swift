@@ -85,10 +85,9 @@ final class MainScreenViewController: UIViewController {
     
     @objc private func settingsTapped() {
         
-        switch mainView.slider.isHidden {
-        case true:
+        if mainView.slider.isHidden {
             mainView.slider.isHidden = false
-        case false:
+        } else {
             mainView.slider.isHidden = true
         }
         
