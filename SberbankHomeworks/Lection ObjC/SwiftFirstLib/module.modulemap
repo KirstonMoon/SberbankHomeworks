@@ -1,0 +1,11 @@
+//
+//  module.modulemap
+//  SwiftFirstLib
+//
+//  Created by Kirill Magerya on 14.07.2021.
+//
+
+module ObjcLibrary {
+    header "../ObjcFirstLib/UmbrellaHeader.h"
+    export *
+}

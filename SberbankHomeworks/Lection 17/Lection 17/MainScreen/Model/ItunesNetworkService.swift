@@ -35,6 +35,7 @@ extension ItunesNetworkService: ItunesNetworkServiceProtocol {
             
             do {
                 let data = try self.dataResponse(data: rawData, response: response)
+                print(data)
                 let recievedData = try JSONDecoder().decode(ItunesResponse.self, from: data)
                 completion(.success(recievedData))
             } catch let error as NetworkServiceError {
